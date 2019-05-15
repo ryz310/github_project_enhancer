@@ -7,6 +7,12 @@
     padding-top: 10px;
     height: 150px;
 }
+.project-column.folded .js-column-card-count {
+    writing-mode: vertical-lr;
+}
+.project-column.folded .column-folding-toggle {
+    writing-mode: vertical-lr;
+}
 .project-column.folded .column-menu-container { display: none; }
 .project-column.folded .column-menu-item { display: none; }
 .project-column.folded .octicon { display: none; }
