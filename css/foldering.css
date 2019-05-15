@@ -1,3 +1,12 @@
+.project-column .column-folding-toggle {
+    transform: rotate(90deg);
+}
+.project-column.folded .column-folding-toggle {
+    margin: 5px 0 8px;
+}
+.project-column.unfolded .column-folding-toggle {
+    margin-right: 8px;
+}
 .project-column.folded {
     min-width: 42px;
     max-width: 42px;
@@ -15,7 +24,6 @@
 }
 .project-column.folded .column-menu-container { display: none; }
 .project-column.folded .column-menu-item { display: none; }
-.project-column.folded .octicon { display: none; }
 .project-column.folded .js-project-issue-details-container { display: none; }
 .project-column.folded .js-project-column-cards { display: none; }
 .project-column.folded .js-project-column-automation-footer { display: none; }
