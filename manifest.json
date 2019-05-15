@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "GitHub Project Enhancer",
+  "version": "0.1",
+  "default_locale": "en",
+  "description": "Enhance GitHub Projects to add accordion UI and so on.",
+  "icons": {
+    "128": "assets/icon.png"
+  },
+  "author": "ryz310@gmail.com",
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/projects/*"],
+      "css": ["css/foldering.css"],
+      "js": ["js/foldering.js"]
+    }
+  ]
+}
