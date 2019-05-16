@@ -20,6 +20,9 @@
 .project-column.folded .js-column-card-count {
     writing-mode: vertical-lr;
 }
+.project-column.folded .js-column-story-point-count {
+    writing-mode: vertical-lr;
+}
 .project-column.folded .column-folding-toggle {
     writing-mode: vertical-lr;
 }
