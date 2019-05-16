@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
   "name": "GitHub Project Enhancer",
+  "short_name": "GPE",
   "version": "0.2",
   "description": "Enhance GitHub Projects to add accordion UI and so on.",
   "icons": {
