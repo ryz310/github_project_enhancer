@@ -1,5 +1,6 @@
 .project-column .column-folding-toggle {
     transform: rotate(90deg);
+    cursor: pointer;
 }
 .project-column.folded .column-folding-toggle {
     margin: 5px 0 8px;
