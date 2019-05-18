@@ -60,16 +60,19 @@ const initialize = (pattern) => {
   calculateStoryPointsForEachColumns(pattern);
 }
 
+// GitHub Project columns are loaded as async.
+// This function detect it finished.
 const detectFinishToLoadCards = async (column) => {
   return new Promise(resolve => {
-    const detectFinishToLoad = (targetColumn) => {
+    const detect = (targetColumn) => {
       if (targetColumn.querySelector('.issue-card')) {
         return resolve(true);
       } else {
-        setTimeout(() => detectFinishToLoad(column), 100);
+        console.debug('run setTimeout in detectFinishToLoadCards()');
+        setTimeout(() => detect(column), 100);
       }
     }
-    return detectFinishToLoad(column);
+    return detect(column);
   });
 }
 
