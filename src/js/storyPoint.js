@@ -56,10 +56,12 @@ const initialize = (pattern) => {
 // This function detect it finished.
 const detectFinishToLoadCards = async (column) => {
   return new Promise(resolve => {
+    let attempts = 0;
     const detect = (targetColumn) => {
-      if (targetColumn.querySelector('.issue-card')) {
+      if (targetColumn.querySelector('.issue-card') || attempts >= 10) {
         return resolve(true);
       } else {
+        attempts++;
         setTimeout(() => detect(targetColumn), 100);
       }
     }
