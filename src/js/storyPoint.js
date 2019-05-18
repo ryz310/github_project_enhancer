@@ -45,13 +45,10 @@ const calculateStoryPointsForEachColumns = (pattern) => {
 }
 
 const initialize = (pattern) => {
-  const dragendEventListener = (e) => {
-    // NONE: Re-calculate all column story point because it cannot to detect
-    //       drag & drop beginning and end.
+  const columnContainer = document.querySelector('.project-columns-container');
+  columnContainer.ondragend = () => {
     calculateStoryPointsForEachColumns(pattern);
   };
-  const issueCards = document.querySelectorAll('.issue-card');
-  issueCards.forEach(issueCard => issueCard.ondragend = dragendEventListener);
   calculateStoryPointsForEachColumns(pattern);
 }
 
