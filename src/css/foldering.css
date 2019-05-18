@@ -14,14 +14,20 @@
 }
 .project-column.folded .js-project-column-name {
     writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    text-align: right;
     padding-top: 10px;
-    height: 150px;
+    height: 300px;
 }
 .project-column.folded .js-column-card-count {
     writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    padding: 5px;
 }
 .project-column.folded .js-column-story-point-count {
     writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    padding: 5px;
 }
 .project-column.folded .column-folding-toggle {
     writing-mode: vertical-lr;
