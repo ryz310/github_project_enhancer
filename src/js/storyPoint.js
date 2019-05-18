@@ -60,6 +60,23 @@ const initialize = (pattern) => {
   calculateStoryPointsForEachColumns(pattern);
 }
 
+// Issue-cards are recreated after drag and drop.
+// This function detect it finished.
+const detectFinishToCreateCard = async (card) => {
+  return new Promise(resolve => {
+    const detect = (originalCard) => {
+      const foundCard = document.getElementById(originalCard.id);
+      if (originalCard !== foundCard) {
+        return resolve(true);
+      } else {
+        console.debug('run setTimeout in detectFinishToCreateCard()');
+        setTimeout(() => detect(card), 100);
+      }
+    }
+    return detect(card);
+  });
+}
+
 // GitHub Project columns are loaded as async.
 // This function detect it finished.
 const detectFinishToLoadCards = async (column) => {
