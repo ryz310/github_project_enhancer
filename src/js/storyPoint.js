@@ -23,7 +23,6 @@ const findOrCreateStoryPointConter = (column) => {
     const columnHeader = column.querySelector('.js-details-container > .hide-sm > h4');
     const cardCounter = column.querySelector('.js-column-card-count');
     columnHeader.insertBefore(newStoryPointCounter, cardCounter.nextSibling);
-    console.debug('create a new story point counter');
     return newStoryPointCounter;
   }
 }
@@ -43,20 +42,16 @@ const calculateStoryPoints = (column, pattern) => {
 
 const calculateStoryPointsForEachColumns = (pattern) => {
   getProjectColumns().forEach(column => calculateStoryPoints(column, pattern));
-  console.debug('Calculated story points for each columns!')
 }
 
 const initialize = (pattern) => {
-  const issueCards = document.querySelectorAll('.issue-card');
-  issueCards.forEach(issueCard => {
-    issueCard.ondragend = (e) => {
-      console.debug('dragend!')
-      console.debug(e.target);
+  const dragendEventListener = (e) => {
     // NONE: Re-calculate all column story point because it cannot to detect
     //       drag & drop beginning and end.
-      calculateStoryPointsForEachColumns(pattern);
-    };
-  });
+    calculateStoryPointsForEachColumns(pattern);
+  };
+  const issueCards = document.querySelectorAll('.issue-card');
+  issueCards.forEach(issueCard => issueCard.ondragend = dragendEventListener);
   calculateStoryPointsForEachColumns(pattern);
 }
 
@@ -68,8 +63,7 @@ const detectFinishToLoadCards = async (column) => {
       if (targetColumn.querySelector('.issue-card')) {
         return resolve(true);
       } else {
-        console.debug('run setTimeout in detectFinishToLoadCards()');
-        setTimeout(() => detect(column), 100);
+        setTimeout(() => detect(targetColumn), 100);
       }
     }
     return detect(column);
@@ -81,7 +75,6 @@ const detectFinishToLoadCards = async (column) => {
   await Promise.all(
     projectColumns.map(column => detectFinishToLoadCards(column))
   );
-  console.debug('finished!');
   initialize(/(\d+)pt/);
   return;
 })();
