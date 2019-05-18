@@ -70,10 +70,16 @@ const detectFinishToLoadCards = async (column) => {
 }
 
 (async () => {
+  const pattern = /(\d+)pt/;
   const projectColumns = toArray(getProjectColumns());
   await Promise.all(
     projectColumns.map(column => detectFinishToLoadCards(column))
   );
-  initialize(/(\d+)pt/);
+  const numOfPointLabels = projectColumns.reduce((total, column) => {
+    return getStoryPointLabels(column, pattern).length;
+  }, 0);
+  if (numOfPointLabels > 0) {
+    initialize(pattern);
+  }
   return;
 })();
