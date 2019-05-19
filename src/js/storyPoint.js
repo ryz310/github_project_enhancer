@@ -76,7 +76,7 @@ const detectFinishToLoadCards = async (column) => {
     projectColumns.map(column => detectFinishToLoadCards(column))
   );
   const numOfPointLabels = projectColumns.reduce((total, column) => {
-    return getStoryPointLabels(column, pattern).length;
+    return total + getStoryPointLabels(column, pattern).length;
   }, 0);
   if (numOfPointLabels > 0) {
     initialize(pattern);
