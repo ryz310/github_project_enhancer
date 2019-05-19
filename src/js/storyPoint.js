@@ -75,6 +75,7 @@ const detectFinishToLoadCards = async (column) => {
   await Promise.all(
     projectColumns.map(column => detectFinishToLoadCards(column))
   );
+  // Detect story point labels. If does not detect labels, not to initialize it.
   const numOfPointLabels = projectColumns.reduce((total, column) => {
     return total + getStoryPointLabels(column, pattern).length;
   }, 0);
