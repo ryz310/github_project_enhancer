@@ -1,14 +1,21 @@
+const foldColumn = (column) => {
+  column.classList.remove('unfolded');
+  column.classList.add('folded');
+  setFoldUpIcon(getToggleButton(column));
+}
+
+const unfoldColumn = (column) => {
+  column.classList.remove('folded');
+  column.classList.add('unfolded');
+  setFoldIcon(getToggleButton(column));
+}
+
 const folderingEventListener = (e) => {
   const projectColumn = e.target.closest('.project-column');
-  const columnFoldingToggle = projectColumn.querySelector('.column-folding-toggle');
   if(projectColumn.classList.contains('folded')) {
-    projectColumn.classList.remove('folded');
-    projectColumn.classList.add('unfolded');
-    setFoldIcon(columnFoldingToggle);
+    unfoldColumn(projectColumn);
   } else {
-    projectColumn.classList.remove('unfolded');
-    projectColumn.classList.add('folded');
-    setFoldUpIcon(columnFoldingToggle);
+    foldColumn(projectColumn);
   }
 }
 
@@ -43,6 +50,10 @@ const generateToggleButton = () => {
   toggleButton.classList.add('column-folding-toggle');
   toggleButton.addEventListener('click', folderingEventListener);
   return toggleButton;
+}
+
+const getToggleButton = (column) => {
+  return column.querySelector('.column-folding-toggle');
 }
 
 (() => {
