@@ -53,7 +53,7 @@ const setAutoCalculation = (pattern) => {
     }
     setTimeout(() => detect(current), 1000);
   }
-  const numberOfLabels = getStoryPointLabels(document, pattern).length;
+  const numOfPointLabels = getStoryPointLabels(document, pattern).length;
   detect(numOfPointLabels);
 }
 
