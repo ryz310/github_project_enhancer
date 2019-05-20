@@ -49,7 +49,21 @@ const initialize = (pattern) => {
   columnContainer.ondragend = () => {
     calculateStoryPointsForEachColumns(pattern);
   };
+  setAutoCalculation(pattern);
   calculateStoryPointsForEachColumns(pattern);
+}
+
+// Auto calculate story points on change number of story point labels.
+const setAutoCalculation = (pattern) => {
+  const detect = (prev) => {
+    const current = getStoryPointLabels(document, pattern).length;
+    if (prev !== current) {
+      calculateStoryPointsForEachColumns(pattern);
+    }
+    setTimeout(() => detect(current), 1000);
+  }
+  const numberOfLabels = getStoryPointLabels(document, pattern).length;
+  detect(numOfPointLabels);
 }
 
 // GitHub Project columns are loaded as async.
