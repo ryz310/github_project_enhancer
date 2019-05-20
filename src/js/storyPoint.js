@@ -44,15 +44,6 @@ const calculateStoryPointsForEachColumns = (pattern) => {
   getProjectColumns().forEach(column => calculateStoryPoints(column, pattern));
 }
 
-const initialize = (pattern) => {
-  const columnContainer = document.querySelector('.project-columns-container');
-  columnContainer.ondragend = () => {
-    calculateStoryPointsForEachColumns(pattern);
-  };
-  setAutoCalculation(pattern);
-  calculateStoryPointsForEachColumns(pattern);
-}
-
 // Auto calculate story points on change number of story point labels.
 const setAutoCalculation = (pattern) => {
   const detect = (prev) => {
@@ -81,6 +72,15 @@ const detectFinishToLoadCards = async (column) => {
     }
     return detect(column);
   });
+}
+
+const initialize = (pattern) => {
+  const columnContainer = document.querySelector('.project-columns-container');
+  columnContainer.ondragend = () => {
+    calculateStoryPointsForEachColumns(pattern);
+  };
+  setAutoCalculation(pattern);
+  calculateStoryPointsForEachColumns(pattern);
 }
 
 (async () => {
