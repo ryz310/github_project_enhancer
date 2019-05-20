@@ -1,3 +1,13 @@
+const getStorageKey = (column) => {
+  return `${location.pathname}.${column.id}`;
+}
+
+// Persists foldering status the local storage
+const persistFolderingStatus = (column, status) => {
+  const key = getStorageKey(column);
+  localStorage.setItem(key, status);
+}
+
 const foldColumn = (column) => {
   column.classList.remove('unfolded');
   column.classList.add('folded');
@@ -14,8 +24,10 @@ const folderingEventListener = (e) => {
   const projectColumn = e.target.closest('.project-column');
   if(projectColumn.classList.contains('folded')) {
     unfoldColumn(projectColumn);
+    persistFolderingStatus(projectColumn, 'unfolded');
   } else {
     foldColumn(projectColumn);
+    persistFolderingStatus(projectColumn, 'folded');
   }
 }
 
