@@ -45,8 +45,10 @@ const generateToggleButton = () => {
   return toggleButton;
 }
 
-const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm > h4');
-columnHeaders.forEach(columnHeader => {
-  const toggleButton = generateToggleButton();
-  columnHeader.insertBefore(toggleButton, columnHeader.firstChild);
-});
+(() => {
+  const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm > h4');
+  columnHeaders.forEach(columnHeader => {
+    const toggleButton = generateToggleButton();
+    columnHeader.insertBefore(toggleButton, columnHeader.firstChild);
+  });
+})();
