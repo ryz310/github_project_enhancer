@@ -44,12 +44,16 @@ const calculateStoryPointsForEachColumns = (pattern) => {
   getProjectColumns().forEach(column => calculateStoryPoints(column, pattern));
 }
 
-const initialize = (pattern) => {
-  const columnContainer = document.querySelector('.project-columns-container');
-  columnContainer.ondragend = () => {
-    calculateStoryPointsForEachColumns(pattern);
-  };
-  calculateStoryPointsForEachColumns(pattern);
+// Auto calculate story points on change number of story point labels.
+const setAutoCalculation = (pattern) => {
+  const detect = (prev) => {
+    const current = getStoryPointLabels(document, pattern).length;
+    if (prev !== current) {
+      calculateStoryPointsForEachColumns(pattern);
+    }
+    setTimeout(() => detect(current), 1000);
+  }
+  detect(0);
 }
 
 // GitHub Project columns are loaded as async.
@@ -67,6 +71,14 @@ const detectFinishToLoadCards = async (column) => {
     }
     return detect(column);
   });
+}
+
+const initialize = (pattern) => {
+  const columnContainer = document.querySelector('.project-columns-container');
+  columnContainer.ondragend = () => {
+    calculateStoryPointsForEachColumns(pattern);
+  };
+  setAutoCalculation(pattern);
 }
 
 (async () => {
