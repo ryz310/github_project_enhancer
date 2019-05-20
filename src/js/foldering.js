@@ -8,6 +8,16 @@ const persistFolderingStatus = (column, status) => {
   localStorage.setItem(key, status);
 }
 
+// Restores foldering status from local storage.
+const restoreFolderingStatus = () => {
+  const columns = document.querySelectorAll('.project-column');
+  columns.forEach(column => {
+    const key = getStorageKey(column);
+    const status = localStorage.getItem(key);
+    status === 'folded' ? foldColumn(column) : unfoldColumn(column);
+  });
+}
+
 const foldColumn = (column) => {
   column.classList.remove('unfolded');
   column.classList.add('folded');
@@ -74,4 +84,5 @@ const getToggleButton = (column) => {
     const toggleButton = generateToggleButton();
     columnHeader.insertBefore(toggleButton, columnHeader.firstChild);
   });
+  restoreFolderingStatus();
 })();
