@@ -1,14 +1,43 @@
+const getStorageKey = (column) => {
+  return `${location.pathname}.${column.id}`;
+}
+
+// Persists foldering status the local storage
+const persistFolderingStatus = (column, status) => {
+  const key = getStorageKey(column);
+  localStorage.setItem(key, status);
+}
+
+// Restores foldering status from local storage.
+const restoreFolderingStatus = () => {
+  const columns = document.querySelectorAll('.project-column');
+  columns.forEach(column => {
+    const key = getStorageKey(column);
+    const status = localStorage.getItem(key);
+    status === 'folded' ? foldColumn(column) : unfoldColumn(column);
+  });
+}
+
+const foldColumn = (column) => {
+  column.classList.remove('unfolded');
+  column.classList.add('folded');
+  setFoldUpIcon(getToggleButton(column));
+}
+
+const unfoldColumn = (column) => {
+  column.classList.remove('folded');
+  column.classList.add('unfolded');
+  setFoldIcon(getToggleButton(column));
+}
+
 const folderingEventListener = (e) => {
   const projectColumn = e.target.closest('.project-column');
-  const columnFoldingToggle = projectColumn.querySelector('.column-folding-toggle');
   if(projectColumn.classList.contains('folded')) {
-    projectColumn.classList.remove('folded');
-    projectColumn.classList.add('unfolded');
-    setFoldIcon(columnFoldingToggle);
+    unfoldColumn(projectColumn);
+    persistFolderingStatus(projectColumn, 'unfolded');
   } else {
-    projectColumn.classList.remove('unfolded');
-    projectColumn.classList.add('folded');
-    setFoldUpIcon(columnFoldingToggle);
+    foldColumn(projectColumn);
+    persistFolderingStatus(projectColumn, 'folded');
   }
 }
 
@@ -45,8 +74,15 @@ const generateToggleButton = () => {
   return toggleButton;
 }
 
-const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm > h4');
-columnHeaders.forEach(columnHeader => {
-  const toggleButton = generateToggleButton();
-  columnHeader.insertBefore(toggleButton, columnHeader.firstChild);
-});
+const getToggleButton = (column) => {
+  return column.querySelector('.column-folding-toggle');
+}
+
+(() => {
+  const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm > h4');
+  columnHeaders.forEach(columnHeader => {
+    const toggleButton = generateToggleButton();
+    columnHeader.insertBefore(toggleButton, columnHeader.firstChild);
+  });
+  restoreFolderingStatus();
+})();
