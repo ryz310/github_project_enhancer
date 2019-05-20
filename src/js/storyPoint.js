@@ -53,8 +53,7 @@ const setAutoCalculation = (pattern) => {
     }
     setTimeout(() => detect(current), 1000);
   }
-  const numOfPointLabels = getStoryPointLabels(document, pattern).length;
-  detect(numOfPointLabels);
+  detect(0);
 }
 
 // GitHub Project columns are loaded as async.
@@ -80,7 +79,6 @@ const initialize = (pattern) => {
     calculateStoryPointsForEachColumns(pattern);
   };
   setAutoCalculation(pattern);
-  calculateStoryPointsForEachColumns(pattern);
 }
 
 (async () => {
