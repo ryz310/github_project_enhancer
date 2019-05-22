@@ -19,8 +19,9 @@ const save_options = () => {
 }
 
 const restore_options = () => {
+  const defaultPattern = '(\\d+)pts?';
   chrome.storage.sync.get(
-    { labelPattern: '\d+(pt|pts)' }, 
+    { labelPattern: defaultPattern },
     (items) => {
       document.getElementById('labelPattern').value = items.labelPattern;
     }

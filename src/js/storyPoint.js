@@ -83,12 +83,11 @@ const initialize = (pattern) => {
 }
 
 const getLabelPattern = async () => {
+  const defaultPattern = '(\\d+)pts?';
   return new Promise((resolve) => {
     chrome.storage.sync.get(
-      { labelPattern: '(\d+)pt(s|)' },
-      (items) => {
-        resolve(new RegExp(items.labelPattern))
-      }
+      { labelPattern: defaultPattern },
+      (items) => { resolve(new RegExp(items.labelPattern)) }
     )
   });
 }
