@@ -1,3 +1,7 @@
 body {
-  margin: 8px
+  margin: 8px;
+}
+
+#status {
+  white-space: pre;
 }
