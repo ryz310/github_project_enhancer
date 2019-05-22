@@ -82,19 +82,18 @@ const initialize = (pattern) => {
   setAutoCalculation(pattern);
 }
 
-const labelPattern = async () => {
+const getLabelPattern = async () => {
+  const defaultPattern = '(\\d+)pts?';
   return new Promise((resolve) => {
     chrome.storage.sync.get(
-      { labelPattern: '(\d+)pt(s|)' },
-      (items) => {
-        resolve(new RegExp(items.labelPattern))
-      }
+      { labelPattern: defaultPattern },
+      (items) => { resolve(new RegExp(items.labelPattern)) }
     )
   });
 }
 
 (async () => {
-  const pattern = await labelPattern();
+  const pattern = await getLabelPattern();
   const projectColumns = toArray(getProjectColumns());
   await Promise.all(
     projectColumns.map(column => detectFinishToLoadCards(column))

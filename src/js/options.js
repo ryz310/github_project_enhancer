@@ -13,16 +13,15 @@ const save_options = () => {
       // Update status to let user know options were saved.
       const status = document.getElementById('statusDiv');
       status.textContent = 'Options saved.';
-      setTimeout(function() {
-        status.textContent = '';
-      }, 750);
+      setTimeout(() => { status.textContent = '' }, 750);
     }
   );
 }
 
 const restore_options = () => {
+  const defaultPattern = '(\\d+)pts?';
   chrome.storage.sync.get(
-    { labelPattern: '\d+(pt|pts)' }, 
+    { labelPattern: defaultPattern },
     (items) => {
       document.getElementById('labelPattern').value = items.labelPattern;
     }
