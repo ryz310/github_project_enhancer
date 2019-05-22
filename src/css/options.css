@@ -1,0 +1,7 @@
+body {
+  margin: 8px;
+}
+
+#status {
+  white-space: pre;
+}

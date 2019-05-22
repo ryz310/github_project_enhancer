@@ -29,7 +29,8 @@ const findOrCreateStoryPointConter = (column) => {
 
 const setStoryPoint = (column, points) => {
   const storyPointConter = findOrCreateStoryPointConter(column);
-  storyPointConter.textContent = points + 'pt'
+  const suffix = points === 1 ? 'pt' : 'pts';
+  storyPointConter.textContent = points + suffix;
 }
 
 const calculateStoryPoints = (column, pattern) => {
@@ -81,8 +82,19 @@ const initialize = (pattern) => {
   setAutoCalculation(pattern);
 }
 
+const labelPattern = async () => {
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(
+      { labelPattern: '(\d+)pt(s|)' },
+      (items) => {
+        resolve(new RegExp(items.labelPattern))
+      }
+    )
+  });
+}
+
 (async () => {
-  const pattern = /(\d+)pt/;
+  const pattern = await labelPattern();
   const projectColumns = toArray(getProjectColumns());
   await Promise.all(
     projectColumns.map(column => detectFinishToLoadCards(column))
