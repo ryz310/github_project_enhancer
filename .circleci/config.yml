@@ -1,0 +1,100 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+
+orbs:
+  jq: circleci/jq@1.8.0
+
+references:
+  - &app_id
+    app_id:
+      type: string
+  - &publish_target
+    publish_target:
+      type: enum
+      enum: ['default', 'trustedTesters']
+      default: default
+
+executors:
+  default:
+    docker:
+      - image: circleci/node:8.16.0
+    working_directory: ~/repo
+
+commands:
+  upload:
+    parameters:
+      <<: *app_id
+      <<: *publish_target
+    steps:
+      - jq/install
+      - run:
+          name: Archive Source Files
+          command: |
+            cd src
+            zip -r gpe.zip *
+      - run:
+          name: Refresh an Access Token
+          command: |
+            echo "export ACCESS_TOKEN=$(curl \
+              -d "client_id=$CLIENT_ID" \
+              -d "client_secret=$CLIENT_SECRET" \
+              -d "refresh_token=$REFRESH_TOKEN" \
+              -d "grant_type=refresh_token" \
+              https://www.googleapis.com/oauth2/v3/token \
+              | jq ".access_token")" >> $BASH_ENV
+      - run:
+          name: Upload a package to update an existing store item
+          command: |
+            curl \
+              -H "Authorization: Bearer $ACCESS_TOKEN" \
+              -H "x-goog-api-version: 2" \
+              -X PUT \
+              -T src/gpe.zip \
+              -s https://www.googleapis.com/upload/chromewebstore/v1.1/items/<< parameters.app_id >>
+      - run:
+          name: Publish an item to the public
+          command: |
+            curl \
+              -H "Authorization: Bearer $ACCESS_TOKEN" \
+              -H "x-goog-api-version: 2" \
+              -H "Content-Length: 0" \
+              -H "publishTarget: << parameters.publish_target >>" \
+              -X POST \
+              -s https://www.googleapis.com/chromewebstore/v1.1/items/<< parameters.app_id >>/publish
+
+jobs:
+  deploy:
+    executor:
+      name: default
+    parameters:
+      <<: *app_id
+      <<: *publish_target
+    steps:
+      - checkout
+      - upload:
+          app_id: << parameters.app_id >>
+          publish_target: << parameters.publish_target >>
+
+workflows:
+  version: 2
+
+  commit:
+    jobs:
+      - deploy:
+          name: deploy_to_staging
+          app_id: $STAGING_APP_ID
+          publish_target: trustedTesters
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          name: deploy_to_production
+          app_id: $PRODUCTION_APP_ID
+          filters:
+            branches:
+              only:
+                - production
