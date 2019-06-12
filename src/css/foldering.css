@@ -17,6 +17,10 @@
     padding-top: 10px;
     height: 300px;
 }
+.project-column.folded .js-filtered-column-card-count {
+    writing-mode: vertical-lr;
+    padding-top: 10px;
+}
 .project-column.folded .js-column-card-count {
     writing-mode: vertical-lr;
     padding: 5px;
