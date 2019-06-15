@@ -4,9 +4,9 @@
 
 [**You Can Install Here!**](https://chrome.google.com/webstore/detail/github-project-enhancer/cbggiffagddcdaffgilodfjjjjejmeoh)
 
-Enhance GitHub Projects to add accordion UI and so on.
+Enhance GitHub Projects by adding accordion UI and so on.
 You can fold project columns.
 
 ![demo](images/demo.gif)
 
-This extension is now developing. New feature will add soon!
+This extension is now under development. New feature will be added soon!
