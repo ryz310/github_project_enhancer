@@ -2,7 +2,12 @@
 
 # GitHub Project Enhancer
 
-[**You Can Install This From Here!**](https://chrome.google.com/webstore/detail/github-project-enhancer/cbggiffagddcdaffgilodfjjjjejmeoh)
+Install this extension/addon:
+
+- [For Google Chrome](https://chrome.google.com/webstore/detail/github-project-enhancer/cbggiffagddcdaffgilodfjjjjejmeoh)
+- [For Mozilla Firefox](https://addons.mozilla.org/de/firefox/addon/github-project-enhancer/)
+
+---
 
 Enhance GitHub Projects by adding accordion UI and so on.
 You can fold project columns.
