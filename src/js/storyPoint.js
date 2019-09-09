@@ -76,9 +76,9 @@ const detectFinishToLoadCards = async (column) => {
 
 const initialize = (pattern) => {
   const columnContainer = document.querySelector('.project-columns-container');
-  columnContainer.ondragend = () => {
-    calculateStoryPointsForEachColumns(pattern);
-  };
+  const calculate = () => { calculateStoryPointsForEachColumns(pattern) };
+  columnContainer.ondragend = calculate;
+  columnContainer.onclick = calculate;
   setAutoCalculation(pattern);
 }
 
