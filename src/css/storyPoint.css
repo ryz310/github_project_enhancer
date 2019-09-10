@@ -1,4 +1,5 @@
 .Counter--green-light {
     background-color: rgba(21, 226, 67, 0.26) !important;
     color: #24292e !important;
+    cursor: pointer;
 }
