@@ -79,7 +79,7 @@ const getToggleButton = (column) => {
 }
 
 (() => {
-  const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm > h4');
+  const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm > h3');
   columnHeaders.forEach(columnHeader => {
     const toggleButton = generateToggleButton();
     columnHeader.insertBefore(toggleButton, columnHeader.firstChild);
