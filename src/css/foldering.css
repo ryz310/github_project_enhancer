@@ -1,12 +1,10 @@
 .project-column .column-folding-toggle {
     transform: rotate(90deg);
     cursor: pointer;
+    margin: 0 8px 0 5px;
 }
 .project-column.folded .column-folding-toggle {
-    margin: 5px 0 8px;
-}
-.project-column.unfolded .column-folding-toggle {
-    margin-right: 8px;
+    writing-mode: vertical-lr;
 }
 .project-column.folded {
     min-width: 42px;
@@ -24,13 +22,18 @@
 .project-column.folded .js-column-card-count {
     writing-mode: vertical-lr;
     padding: 5px;
+    margin: 4px 0 4px 1px !important;
+}
+.project-column.unfolded .js-column-card-count {
+    margin: 0 4px 0 !important;
 }
 .project-column.folded .js-column-story-point-count {
     writing-mode: vertical-lr;
     padding: 5px;
+    margin-left: 1px;
 }
-.project-column.folded .column-folding-toggle {
-    writing-mode: vertical-lr;
+.project-column.folded h3 {
+    padding-left: 2px !important;
 }
 .project-column.folded .column-menu-container { display: none; }
 .project-column.folded .column-menu-item { display: none; }
