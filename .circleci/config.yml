@@ -5,7 +5,7 @@
 version: 2.1
 
 orbs:
-  jq: circleci/jq@1.8.0
+  jq: circleci/jq@1.9.1
 
 references:
   - &app_id
@@ -20,7 +20,7 @@ references:
 executors:
   default:
     docker:
-      - image: circleci/node:8.16.0
+      - image: circleci/node:8.16.2
     working_directory: ~/repo
 
 commands:

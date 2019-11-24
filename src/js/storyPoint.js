@@ -20,7 +20,7 @@ const findOrCreateStoryPointConter = (column) => {
     newStoryPointCounter.classList.add('Counter');
     newStoryPointCounter.classList.add('Counter--green-light');
     newStoryPointCounter.classList.add('js-column-story-point-count');
-    const columnHeader = column.querySelector('.js-details-container > .hide-sm > h4');
+    const columnHeader = column.querySelector('.js-details-container > .hide-sm');
     const cardCounter = column.querySelector('.js-column-card-count');
     columnHeader.insertBefore(newStoryPointCounter, cardCounter.nextSibling);
     return newStoryPointCounter;

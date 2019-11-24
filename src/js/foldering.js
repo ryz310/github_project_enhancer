@@ -79,10 +79,11 @@ const getToggleButton = (column) => {
 }
 
 (() => {
-  const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm > h4');
+  const columnHeaders = document.querySelectorAll('.project-column > .js-details-container > .hide-sm');
   columnHeaders.forEach(columnHeader => {
     const toggleButton = generateToggleButton();
-    columnHeader.insertBefore(toggleButton, columnHeader.firstChild);
+    const cardCounter = columnHeader.querySelector('.js-column-card-count');
+    columnHeader.insertBefore(toggleButton, cardCounter);
   });
   restoreFolderingStatus();
 })();
