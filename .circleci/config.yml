@@ -5,7 +5,7 @@
 version: 2.1
 
 orbs:
-  jq: circleci/jq@1.9.1
+  jq: circleci/jq@1.10.0
 
 references:
   - &app_id
