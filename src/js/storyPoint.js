@@ -7,7 +7,7 @@ const getProjectColumns = () => {
 }
 
 const getStoryPointLabels = (column, pattern) => {
-  const labels = toArray(column.querySelectorAll('.issue-card-label'));
+  const labels = toArray(column.querySelectorAll('.IssueLabel'));
   return labels.filter(label => pattern.test(label.innerText));
 }
 
