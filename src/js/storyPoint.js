@@ -7,14 +7,14 @@ const getProjectColumns = () => {
 }
 
 const getStoryPointLabels = (column, pattern) => {
-  const labels = toArray(column.querySelectorAll('.issue-card-label'));
+  const labels = toArray(column.querySelectorAll('.IssueLabel'));
   return labels.filter(label => pattern.test(label.innerText));
 }
 
-const findOrCreateStoryPointConter = (column) => {
-  const storyPointConter = column.querySelector('.js-column-story-point-count');
-  if (storyPointConter) {
-    return storyPointConter;
+const findOrCreateStoryPointCounter = (column) => {
+  const storyPointCounter = column.querySelector('.js-column-story-point-count');
+  if (storyPointCounter) {
+    return storyPointCounter;
   } else {
     const newStoryPointCounter = document.createElement('span');
     newStoryPointCounter.classList.add('Counter');
@@ -28,9 +28,9 @@ const findOrCreateStoryPointConter = (column) => {
 }
 
 const setStoryPoint = (column, points) => {
-  const storyPointConter = findOrCreateStoryPointConter(column);
+  const storyPointCounter = findOrCreateStoryPointCounter(column);
   const suffix = points === 1 ? 'pt' : 'pts';
-  storyPointConter.textContent = points + suffix;
+  storyPointCounter.textContent = points + suffix;
 }
 
 const calculateStoryPoints = (column, pattern) => {

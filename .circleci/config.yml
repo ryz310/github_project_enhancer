@@ -5,7 +5,7 @@
 version: 2.1
 
 orbs:
-  jq: circleci/jq@1.9.1
+  jq: circleci/jq@2.2.0
 
 references:
   - &app_id
@@ -20,7 +20,7 @@ references:
 executors:
   default:
     docker:
-      - image: circleci/node:8.16.2
+      - image: circleci/node:8.17.0
     working_directory: ~/repo
 
 commands:
@@ -83,14 +83,6 @@ workflows:
 
   commit:
     jobs:
-      - deploy:
-          name: deploy_to_staging
-          app_id: $STAGING_APP_ID
-          publish_target: trustedTesters
-          filters:
-            branches:
-              only:
-                - master
       - deploy:
           name: deploy_to_production
           app_id: $PRODUCTION_APP_ID
