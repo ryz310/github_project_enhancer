@@ -20,7 +20,7 @@ references:
 executors:
   default:
     docker:
-      - image: circleci/node:17.1.0
+      - image: circleci/node:17.2.0
     working_directory: ~/repo
 
 commands:
